@@ -1,0 +1,23 @@
+import 'package:edrawer/screens/home_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:edrawer/constants/theme/theme.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'eDrawer',
+      theme: MyTheme.global,
+      home: HomePage(),
+    );
+  }
+}
