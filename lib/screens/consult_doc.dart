@@ -3,7 +3,6 @@ import 'package:edrawer/constants/model.dart';
 import 'package:edrawer/constants/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:edrawer/screens/doc_screen.dart';
-import 'package:edrawer/constants/db_handler.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:open_filex/open_filex.dart';
 

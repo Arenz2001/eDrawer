@@ -14,6 +14,7 @@ class DocUpdateFile extends StatefulWidget {
   String? fileTitle;
   bool? updateFile;
   int? folder_id;
+  String? doc_Path;
 
   DocUpdateFile({
     // Documents
@@ -21,6 +22,7 @@ class DocUpdateFile extends StatefulWidget {
     this.fileTitle,
     this.updateFile,
     this.folder_id,
+    this.doc_Path,
   });
 
   @override
@@ -34,13 +36,20 @@ class _DocUpdateFileState extends State<DocUpdateFile> {
   final _fromKey = GlobalKey<FormState>();
 
   late var file = null;
-  String file_name = 'Nom du fichier : ';
+  String file_name = '';
   //var textField = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     dbHelper = DBHelper();
+
+    if (widget.fileTitle == null) {
+      return;
+    } else {
+      titleController.text = widget.fileTitle.toString();
+    }
+
     loadData();
   }
 
@@ -59,6 +68,7 @@ class _DocUpdateFileState extends State<DocUpdateFile> {
 
   @override
   Widget build(BuildContext context) {
+    //titleController.text = widget.fileTitle.toString();
     String appTitle;
     if (widget.updateFile == true) {
       appTitle = "Document";
@@ -66,7 +76,10 @@ class _DocUpdateFileState extends State<DocUpdateFile> {
       appTitle = "Ajout document";
     }
 
+    //file_name = widget.doc_Path.toString().split('/').last;
+
     FilePickerResult? result;
+    var docPath;
 
     return Scaffold(
       appBar: AppBar(
@@ -98,9 +111,9 @@ class _DocUpdateFileState extends State<DocUpdateFile> {
                         if (result == null) return;
 
                         file = result.files.first;
-
+                        //print(file);
                         setState(() {
-                          file_name = '${file_name}' + '${file.name}';
+                          file_name = '${file.name}';
                           //titleController.text = textField.text;
                         });
                       },
@@ -114,7 +127,7 @@ class _DocUpdateFileState extends State<DocUpdateFile> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Text('${file_name}'),
+                    Text('Nom du fichier : ${file_name}'),
                     const SizedBox(
                       height: 70,
                     ),
@@ -169,6 +182,10 @@ class _DocUpdateFileState extends State<DocUpdateFile> {
                           onTap: () {
                             setState(() {
                               titleController.clear();
+                              widget.fileTitle = "";
+                              //ajouter le clear du fichier pick
+                              result?.files.clear();
+                              file_name = "";
                             });
                           },
                           child: Container(
@@ -192,19 +209,22 @@ class _DocUpdateFileState extends State<DocUpdateFile> {
                         borderRadius: BorderRadius.circular(15),
                         child: InkWell(
                           onTap: () async {
-                            final newFile = await saveFilePermanently(file);
-                            //print('From path : ${file.path!}');
-                            //print('to path : ${newFile.path}');
+                            //file = widget.doc_Path;
+                            if (file != null) {
+                              final newFile = await saveFilePermanently(file);
+                              //print('From path : ${file.path!}');
+                              //print('to path : ${newFile.path}');
 
-                            String docPath = newFile.toString();
-                            if (docPath.isNotEmpty) {
-                              docPath = docPath.substring(7, docPath.length);
+                              docPath = newFile.toString();
                               if (docPath.isNotEmpty) {
-                                docPath = docPath.substring(0, docPath.length - 1);
+                                docPath = docPath.substring(7, docPath.length);
+                                if (docPath.isNotEmpty) {
+                                  docPath = docPath.substring(0, docPath.length - 1);
+                                }
                               }
+                            } else {
+                              docPath = widget.doc_Path;
                             }
-
-                            //print(docPath);
 
                             if (_fromKey.currentState!.validate()) {
                               if (widget.updateFile == true) {
@@ -238,20 +258,35 @@ class _DocUpdateFileState extends State<DocUpdateFile> {
                               });
                             }
                           },
-                          child: Container(
-                            alignment: Alignment.center,
-                            margin: const EdgeInsets.symmetric(horizontal: 20),
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            height: 55,
-                            width: 120,
-                            child: const Text(
-                              "Ajouter",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                          child: widget.updateFile == true
+                              ? Container(
+                                  alignment: Alignment.center,
+                                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  height: 55,
+                                  width: 120,
+                                  child: const Text(
+                                    "Modifier",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  alignment: Alignment.center,
+                                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  height: 55,
+                                  width: 120,
+                                  child: const Text(
+                                    "Ajouter",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
                         ),
                       ),
                     ],

@@ -54,8 +54,7 @@ class _DocScreenState extends State<DocScreen> {
             centerTitle: true,
             elevation: 0,
             leading: IconButton(
-              onPressed: //() => Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomePage()), (Route route) => false),
-                  () async {
+              onPressed: () async {
                 Navigator.of(context).pop(
                   MaterialPageRoute(builder: (context) => HomePage()),
                 );
@@ -101,6 +100,27 @@ class _DocScreenState extends State<DocScreen> {
                           borderRadius: BorderRadius.circular(15.0),
                           //Rajouter un truc en mode etes vous sur
                           child: Dismissible(
+                            confirmDismiss: (DismissDirection direction) async {
+                              final confirmed = await showDialog<bool>(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: const Text('Êtes-vous sûr ?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(context, false),
+                                        child: const Text('Non'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(context, true),
+                                        child: const Text('Oui'),
+                                      )
+                                    ],
+                                  );
+                                },
+                              );
+                              return confirmed;
+                            },
                             key: ValueKey<int>(fileId),
                             direction: DismissDirection.endToStart,
                             background: Container(
@@ -118,6 +138,19 @@ class _DocScreenState extends State<DocScreen> {
                               });
                             },
                             child: GestureDetector(
+                              onLongPress: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DocUpdateFile(
+                                        fileId: fileId,
+                                        folder_id: folderId,
+                                        fileTitle: fileTitle,
+                                        doc_Path: docPath,
+                                        updateFile: true,
+                                      ),
+                                    ));
+                              },
                               onTap: () {
                                 Navigator.push(
                                     context,

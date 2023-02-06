@@ -120,6 +120,7 @@ class _AddUpdateFileState extends State<AddUpdateFile> {
                           onTap: () {
                             setState(() {
                               titleController.clear();
+                              widget.folderTitle = "";
                               //descController.clear();
                             });
                           },
