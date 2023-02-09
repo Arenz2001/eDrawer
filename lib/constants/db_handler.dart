@@ -74,7 +74,7 @@ class DBHelper{
   Future<List<DocModel>> getDataListDoc(int? folder_id) async{
     await db;
     //int folder_id = folder_id;
-    final List<Map<String, Object?>> QueryResult = await _db!.rawQuery("SELECT * FROM myfile WHERE ',' || folder_id || ',' LIKE '%,' || ? || ',%'", ["$folder_id"]);
+    final List<Map<String, Object?>> QueryResult = await _db!.rawQuery("SELECT * FROM myfile WHERE ',' || folder_id || ',' LIKE '%,' || ? || ',%' ORDER BY title COLLATE NOCASE ASC", ["$folder_id"]);
     return QueryResult.map((e) => DocModel.fromMap(e)).toList();
   }
 

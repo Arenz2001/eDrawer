@@ -35,13 +35,11 @@ class _DocScreenState extends State<DocScreen> {
     dataList = dbHelper!.getDataListDoc(widget.folderId);
   }
 
+  bool isSearching = false;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      //onWillPop: () async {
-      //  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomePage()), (Route route) => false);
-      //  return Future.value(true);
-      //},
       onWillPop: () async {
         Navigator.of(context).pop(
           MaterialPageRoute(builder: (context) => HomePage()),
@@ -50,18 +48,52 @@ class _DocScreenState extends State<DocScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-            title: const Text("eDrawer - Documents"),
-            centerTitle: true,
-            elevation: 0,
-            leading: IconButton(
-              onPressed: () async {
-                Navigator.of(context).pop(
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
-                return Future.value(true);
-              },
-              icon: const Icon(Icons.arrow_back),
-            )),
+          title: !isSearching
+              ? const Text('eDrawer - Documents')
+              : TextField(
+                  onChanged: (value) {
+                    //_filterCountries(value);
+                  },
+                  style: const TextStyle(color: MyTheme.backColor),
+                  decoration: const InputDecoration(
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.white,
+                      ),
+                      hintText: "Nom du document",
+                      hintStyle: TextStyle(color: MyTheme.backColor)),
+                ),
+          centerTitle: true,
+          elevation: 0,
+          leading: IconButton(
+            onPressed: () async {
+              Navigator.of(context).pop(
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+              return Future.value(true);
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
+          actions: <Widget>[
+            isSearching
+                ? IconButton(
+                    icon: const Icon(Icons.cancel),
+                    onPressed: () {
+                      setState(() {
+                        this.isSearching = false;
+                      });
+                    },
+                  )
+                : IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {
+                      setState(() {
+                        this.isSearching = true;
+                      });
+                    },
+                  )
+          ],
+        ),
         body: Column(
           children: [
             const SizedBox(
@@ -95,10 +127,8 @@ class _DocScreenState extends State<DocScreen> {
                         String fileTitle = snapshot.data![index].title.toString();
                         int folderId = snapshot.data![index].folder_id!.toInt();
                         String docPath = snapshot.data![index].doc_path.toString();
-                        //String fileDesc = snapshot.data![index].desc.toString();
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(15.0),
-                          //Rajouter un truc en mode etes vous sur
                           child: Dismissible(
                             confirmDismiss: (DismissDirection direction) async {
                               final confirmed = await showDialog<bool>(
@@ -211,7 +241,6 @@ class _DocScreenState extends State<DocScreen> {
                     folder_id: widget.folderId,
                   ),
                 ));
-            //Provider.of<IdProvider>(context, listen: false).saveId(widget.folderId);
           },
         ),
       ),
