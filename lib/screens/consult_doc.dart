@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:edrawer/screens/doc_screen.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:open_filex/open_filex.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ConsultPage extends StatefulWidget {
   int? folder_id;
@@ -39,6 +40,9 @@ class _ConsultPageState extends State<ConsultPage> {
     String docName = widget.docName.toString();
     String path = "'${widget.doc_path}'";
 
+    var file = File('${widget.doc_path}');
+    var savedFile = file.path;
+
     return WillPopScope(
       onWillPop: () async {
         Navigator.of(context).pop(
@@ -72,7 +76,7 @@ class _ConsultPageState extends State<ConsultPage> {
                   Column(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         //width: MediaQuery.of(context).size.width - 50,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
@@ -83,18 +87,29 @@ class _ConsultPageState extends State<ConsultPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Padding(
+                          /*Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(),
-                              onPressed: () => {},
+                              onPressed: () async => {
+                                file.copy("/storage/emulated/0/Documents/eDrawer"),
+                                Fluttertoast.showToast(
+                                  msg: "Fichier enregistré dans le dossier Documents",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.green,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0,
+                                ),
+                              },
                               child: const Text("Enregistrer", style: TextStyle(color: MyTheme.backColor)),
                             ),
-                          ),
+                          ),*/
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
-                              onPressed: () => {OpenFilex.open(widget.docName.toString())},
+                              onPressed: () => {OpenFilex.open(savedFile)},
                               child: const Text(
                                 "Ouvrir",
                                 style: TextStyle(color: MyTheme.backColor),
@@ -128,20 +143,29 @@ class _ConsultPageState extends State<ConsultPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Padding(
+                            /*Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(),
                                 onPressed: () async => {
-                                  await OpenFilex.open(path),
+                                  file.copy("/storage/emulated/0/Documents/eDrawer"),
+                                  Fluttertoast.showToast(
+                                    msg: "Fichier enregistré dans le dossier Documents",
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 1,
+                                    backgroundColor: Colors.green,
+                                    textColor: Colors.white,
+                                    fontSize: 16.0,
+                                  ),
                                 },
                                 child: const Text("Enregistrer", style: TextStyle(color: MyTheme.backColor)),
                               ),
-                            ),
+                            ),*/
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton(
-                                onPressed: () => {OpenFilex.open(widget.docName.toString())},
+                                onPressed: () => {OpenFilex.open(savedFile)},
                                 child: const Text(
                                   "Ouvrir",
                                   style: TextStyle(color: MyTheme.backColor),
@@ -175,20 +199,29 @@ class _ConsultPageState extends State<ConsultPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         //crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Padding(
+                          /*Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(),
                               onPressed: () async => {
-                                await OpenFilex.open(path),
+                                file.copy("/storage/emulated/0/Documents/eDrawer"),
+                                Fluttertoast.showToast(
+                                  msg: "Fichier enregistré dans le dossier Documents",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.green,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0,
+                                ),
                               },
                               child: const Text("Enregistrer", style: TextStyle(color: MyTheme.backColor)),
                             ),
-                          ),
+                          ),*/
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
-                              onPressed: () => {OpenFilex.open(widget.docName.toString())},
+                              onPressed: () => {OpenFilex.open(savedFile)},
                               child: const Text(
                                 "Ouvrir",
                                 style: TextStyle(color: MyTheme.backColor),

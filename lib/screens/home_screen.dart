@@ -194,7 +194,10 @@ class _HomePageState extends State<HomePage> {
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: MyTheme.lighterAccentBackColor,
-          child: const Icon(Icons.add),
+          child: const Icon(
+            Icons.add,
+            color: MyTheme.textColor,
+          ),
           onPressed: () {
             Navigator.push(
                 context,

@@ -1,4 +1,4 @@
-import 'dart:ffi';
+//import 'dart:ffi';
 
 import 'package:edrawer/constants/add_update_screen.dart';
 import 'package:edrawer/constants/db_handler.dart';
@@ -232,7 +232,10 @@ class _DocScreenState extends State<DocScreen> {
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: MyTheme.lighterAccentBackColor,
-          child: const Icon(Icons.add),
+          child: const Icon(
+            Icons.add,
+            color: MyTheme.textColor,
+          ),
           onPressed: () {
             Navigator.push(
                 context,
