@@ -75,37 +75,26 @@ class _ConsultPageState extends State<ConsultPage> {
                 if (fileType == 'jpeg' || fileType == 'png' || fileType == 'gif' || fileType == 'jpg') ...[
                   Column(
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        //width: MediaQuery.of(context).size.width - 50,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.file(File(widget.doc_path.toString())),
+                      ConstrainedBox(
+                        constraints: new BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height - 200,
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          //width: MediaQuery.of(context).size.width - 50,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.file(
+                              File(widget.doc_path.toString()),
+                              fit: BoxFit.fitWidth,
+                            ),
+                          ),
                         ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          /*Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(),
-                              onPressed: () async => {
-                                file.copy("/storage/emulated/0/Documents/eDrawer"),
-                                Fluttertoast.showToast(
-                                  msg: "Fichier enregistré dans le dossier Documents",
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.green,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0,
-                                ),
-                              },
-                              child: const Text("Enregistrer", style: TextStyle(color: MyTheme.backColor)),
-                            ),
-                          ),*/
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
