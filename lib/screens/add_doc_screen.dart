@@ -92,6 +92,10 @@ class _AddDocPageState extends State<AddDocPage> {
       appTitle = "Ajout document";
     }
 
+    if (widget.updateFile == true) {
+      file_name = widget.fileTitle!;
+    }
+
     //file_name = widget.doc_Path.toString().split('/').last;
 
     FilePickerResult? result;
@@ -253,6 +257,7 @@ class _AddDocPageState extends State<AddDocPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
+                        /*
                         Material(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -264,7 +269,7 @@ class _AddDocPageState extends State<AddDocPage> {
                                 titleController.clear();
                                 widget.fileTitle = "";
                                 //ajouter le clear du fichier pick
-                                result?.files.clear();
+                                result = null;
                                 file_name = "";
                               });
                             },
@@ -284,6 +289,7 @@ class _AddDocPageState extends State<AddDocPage> {
                             ),
                           ),
                         ),
+                        */
                         Material(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),

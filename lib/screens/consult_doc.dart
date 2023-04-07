@@ -137,25 +137,6 @@ class _ConsultPageState extends State<ConsultPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            /*Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(),
-                                onPressed: () async => {
-                                  file.copy("/storage/emulated/0/Documents/eDrawer"),
-                                  Fluttertoast.showToast(
-                                    msg: "Fichier enregistré dans le dossier Documents",
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.BOTTOM,
-                                    timeInSecForIosWeb: 1,
-                                    backgroundColor: Colors.green,
-                                    textColor: Colors.white,
-                                    fontSize: 16.0,
-                                  ),
-                                },
-                                child: const Text("Enregistrer", style: TextStyle(color: MyTheme.backColor)),
-                              ),
-                            ),*/
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton(

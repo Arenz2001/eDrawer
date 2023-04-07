@@ -89,10 +89,14 @@ class _HomePageState extends State<HomePage> {
             PopupMenuButton<int>(
               onSelected: (item) => onSelected(context, item),
               itemBuilder: (context) => [
-                const PopupMenuItem(
+                /*const PopupMenuItem(
                   value: 0,
                   child: Text('Paramètres'),
                 ),
+                const PopupMenuItem(
+                  value: 1,
+                  child: Text('À propos'),
+                )*/
                 const PopupMenuItem(
                   value: 1,
                   child: Text('À propos'),

@@ -33,28 +33,66 @@ class AboutUsPage extends StatelessWidget {
             icon: const Icon(Icons.arrow_back),
           ),
         ),
-        body: Column(
-          children: [
-            const SizedBox(
-              height: 5,
-            ),
-            ElevatedButton(
-              onPressed: _launchURL,
-              child: const Text('Politique de confidentialité'),
-            )
-          ],
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 5,
+              ),
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: const Text("eDrawer est une application open source. Vous pouvez visiter le github à l'adresse suivante : "),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                onPressed: () => _launchURL2(),
+                child: const Text('eDrawer GitHub'),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              ElevatedButton(
+                onPressed: () => _launchURL(),
+                child: const Text('Politique de confidentialité'),
+              ),
+              const SizedBox(
+                height: 55,
+              ),
+              Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(10),
+                child: const Text(
+                  "Si vous rencontrez un bug ou que vous voulez faire remonter une ou plusieurs suggestions. Vous pouvez le faire sur le github ou par mail : if.arenz@gmail.com",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  _launchURL() async {
-    const url = 'https://github.com/Arenz2001/eDrawer-privacy/blob/main/privacy-policy.md';
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      throw 'Could not launch $url';
+  Future<void> _launchURL() async {
+    final Uri uri = Uri(scheme: 'https', host: 'www.github.com', path: 'Arenz2001/eDrawer-privacy/blob/main/privacy-policy.md');
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw "Impossible d'aller vers le site";
+    }
+  }
+
+  Future<void> _launchURL2() async {
+    final Uri uri = Uri(scheme: 'https', host: 'www.github.com', path: 'Arenz2001/eDrawer');
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw "Impossible d'aller vers le site";
     }
   }
 }

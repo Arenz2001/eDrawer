@@ -158,6 +158,7 @@ class _AddFolderPageState extends State<AddFolderPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      /*
                       Material(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -187,6 +188,7 @@ class _AddFolderPageState extends State<AddFolderPage> {
                           ),
                         ),
                       ),
+                      */
                       Material(
                         //color: AppTheme.detailsColor,
                         shape: RoundedRectangleBorder(
