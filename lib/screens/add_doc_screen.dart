@@ -87,7 +87,7 @@ class _AddDocPageState extends State<AddDocPage> {
 
     String appTitle;
     if (widget.updateFile == true) {
-      appTitle = "Document";
+      appTitle = "Édition - document";
     } else {
       appTitle = "Ajout document";
     }
@@ -198,6 +198,7 @@ class _AddDocPageState extends State<AddDocPage> {
                         child: TextFormField(
                           keyboardType: TextInputType.multiline,
                           controller: titleController,
+                          textCapitalization: TextCapitalization.words,
                           decoration: const InputDecoration(
                             hintText: "Titre du document",
                           ),

@@ -19,8 +19,23 @@ class DBHelper {
   initDatabase() async {
     io.Directory documentDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentDirectory.path, 'edrawer.db');
-    var db = await openDatabase(path, version: 1, onCreate: _createDatabase);
+    var db = await openDatabase(path, version: 2, onCreate: _createDatabase, onUpgrade: _onUpgrade);
     return db;
+  }
+
+  void _onUpgrade(Database db, int oldVersion, int newVersion) {
+    if (oldVersion < newVersion) {
+      db.execute("ALTER TABLE myfile ADD COLUMN doc2_path STRING");
+      db.execute("ALTER TABLE myfile ADD COLUMN doc3_path STRING");
+      db.execute("ALTER TABLE myfile ADD COLUMN doc4_path STRING");
+      db.execute("ALTER TABLE myfile ADD COLUMN doc5_path STRING");
+      db.execute("ALTER TABLE myfile ADD COLUMN doc6_path STRING");
+      db.execute("ALTER TABLE myfile ADD COLUMN doc7_path STRING");
+      db.execute("ALTER TABLE myfile ADD COLUMN doc8_path STRING");
+      db.execute("ALTER TABLE myfile ADD COLUMN doc9_path STRING");
+      db.execute("ALTER TABLE myfile ADD COLUMN doc10_path STRING");
+      db.execute("ALTER TABLE myfile ADD COLUMN multiple_doc BOOL");
+    }
   }
 
   _createDatabase(Database db, int version) async {
@@ -28,7 +43,7 @@ class DBHelper {
       "CREATE TABLE myfolder(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, folder_color STRING)",
     );
     await db.execute(
-      "CREATE TABLE myfile(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, doc_path STRING, doc_color STRING, folder_id INTEGER)",
+      "CREATE TABLE myfile(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, doc_path STRING, doc_color STRING, folder_id INTEGER, doc2_path STRING, doc3_path STRING, doc4_path STRING, doc5_path STRING, doc6_path STRING, doc7_path STRING, doc8_path STRING, doc9_path STRING, doc10_path STRING, multiple_doc BOOL)",
     );
   }
 

@@ -147,7 +147,7 @@ class _DocPageState extends State<DocPage> {
                             },
                             child: GestureDetector(
                               onLongPress: () {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => AddDocPage(

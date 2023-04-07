@@ -19,6 +19,7 @@ class AddFolderPage extends StatefulWidget {
 
 class _AddFolderPageState extends State<AddFolderPage> {
   DBHelper? dbHelper;
+
   late Future<List<DossierModel>> dataList;
 
   final _fromKey = GlobalKey<FormState>();
@@ -68,7 +69,7 @@ class _AddFolderPageState extends State<AddFolderPage> {
 
     String appTitle;
     if (widget.updateFolder == true) {
-      appTitle = "Édition";
+      appTitle = "Édition - dossier";
     } else {
       appTitle = "Ajout dossier";
     }
@@ -106,6 +107,7 @@ class _AddFolderPageState extends State<AddFolderPage> {
                       child: TextFormField(
                         keyboardType: TextInputType.multiline,
                         controller: titleController,
+                        textCapitalization: TextCapitalization.words,
                         decoration: const InputDecoration(hintText: 'Titre du dossier'),
                         validator: (value) {
                           if (value!.isEmpty) {
